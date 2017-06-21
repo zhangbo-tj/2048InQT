@@ -10,8 +10,8 @@
 >界面部分改进： 1. 游戏失败和成功时显示当前(最好)成绩; 2. 显示最好成绩和当前局的成绩
 
 ## 程序截图
->![游戏开始界面](2048InQT/screenshot/gamestart.png)
+>![游戏开始界面](https://github.com/zhangbo-tj/2048InQT/raw/master/screenshot/gamestart.png)
 >
->![游戏失败界面](2048InQT/screenshot/gameover.png)
+>![游戏失败界面](https://github.com/zhangbo-tj/2048InQT/raw/master/screenshot/gameover.png)
 >
->![游戏成功界面](2048InQT/screenshot/gamewon.png)
+>![游戏成功界面](https://github.com/zhangbo-tj/2048InQT/raw/master/screenshot/gamewon.png)
