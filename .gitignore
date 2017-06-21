@@ -1,0 +1,12 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs/2048InQt/v14
+/2048InQt/GeneratedFiles
+/2048InQt/x64/Debug/2048InQt.tlog
+/2048InQt/x64/Debug
+/x64/Debug
+*.sln
+/2048InQt.VC.db
+/2048InQt.VC.VC.opendb
