@@ -8,18 +8,20 @@
 #include <QLabel>
 #include <QPushButton>
 
-#include <QDebug>
 
-GameBoard::GameBoard(QWidget* parent):QWidget(parent),max_score_(0){
-	dimension_ = 4;
+/*
+ *	构造函数，初始化控件、界面和相关的参数
+ */
+GameBoard::GameBoard(QWidget* parent):QWidget(parent),max_score_(0),dimension_(4){
 	setFocusPolicy(Qt::TabFocus);
-	game_ = new Game(4);
+	
+	//初始化游戏
+	game_ = new Game(dimension_);
 	game_->RandomGenerate();
 	game_->RandomGenerate();
 	game_->RegisterObserver(this);
 
-	
-
+	//初始化控件
 	board_.resize(dimension_);
 	for (int i = 0; i < dimension_; i++) {
 		board_[i].clear();
@@ -29,6 +31,7 @@ GameBoard::GameBoard(QWidget* parent):QWidget(parent),max_score_(0){
 	}
 	InitWidgets();
 
+	//绘制所有的数据标签
 	DrawBoard();
 
 	setStyleSheet(QString("QGameBoard{background-color: rgb{187,173,160}}"));
@@ -39,6 +42,10 @@ GameBoard::GameBoard(QWidget* parent):QWidget(parent),max_score_(0){
 }
 
 
+
+/*
+ *	析构函数
+ */
 GameBoard::~GameBoard(){
 	delete game_;
 	for (int i = 0; i < dimension_; i++) {
@@ -48,6 +55,10 @@ GameBoard::~GameBoard(){
 	}
 }
 
+
+/*
+ *	键盘操作，用户通过键盘操作游戏
+ */
 void GameBoard::keyPressEvent(QKeyEvent* event) {
 	switch (event->key())	{
 	case Qt::Key_Up:
@@ -69,16 +80,21 @@ void GameBoard::keyPressEvent(QKeyEvent* event) {
 
 
 
+/*
+ *	更新当前页面内容
+ */
 void GameBoard::notify() {
 	int cur_score = game_->GetScore();
 	max_score_ = max_score_ > cur_score ? max_score_ : cur_score;
 	maxscore_value_label_->setText(QString::number(max_score_));
 	curscore_value_label_->setText(QString::number(cur_score));
 	
+	//如果游戏失败，则显示游戏失败页面
 	if (game_->IsGameOver()) {
 		gameover_window_.show();
 		gameover_window_.GetScoreLabel()->setText(QString("Score: %1").arg(max_score_));
 	}
+	//如果游戏成功，则返回游戏成功界面
 	else if (game_->Won()) {
 		gamewon_window_.show();
 		gamewon_window_.GetScoreLabel()->setText(QString("Score:%1").arg(max_score_));
@@ -87,8 +103,10 @@ void GameBoard::notify() {
 }
 
 
+/*
+ *	显示游戏数据
+ */
 void GameBoard::DrawBoard() {
-	
 	for (int i = 0; i < dimension_; i++) {
 		for (int j = 0; j < dimension_; j++) {
 			DrawGrid(i, j);
@@ -97,6 +115,9 @@ void GameBoard::DrawBoard() {
 }
 
 
+/*
+ *	分别绘制每一个数据标签
+ */
 void GameBoard::DrawGrid(int i, int j) {
 	int val = game_->GetValue(i, j);
 	
@@ -161,6 +182,9 @@ void GameBoard::DrawGrid(int i, int j) {
 }
 
 
+/*
+ *	初始化游戏页面的控件
+ */
 void GameBoard::InitWidgets() {
 	game_title_label_ = new QLabel(QString::fromLocal8Bit("2048"));
 	game_title_label_->setStyleSheet(
@@ -218,6 +242,10 @@ void GameBoard::InitWidgets() {
 	setLayout(main_layout_);
 }
 
+
+/*
+ *	重新开始游戏
+ */
 void GameBoard::RestartGame() {
 	game_->Restart();
 	DrawBoard();
@@ -226,6 +254,9 @@ void GameBoard::RestartGame() {
 }
 
 
+/*
+ *	继续游戏
+ */
 void GameBoard::Continue() {
 	game_->SetContinue();
 	gamewon_window_.hide();

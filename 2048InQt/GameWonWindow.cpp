@@ -5,10 +5,16 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
+
+/*
+ *	构造函数
+ */
 GameWonWindow::GameWonWindow(QWidget* parent):QWidget(parent){
 	setStyleSheet("GameOverWindow{background: rgb(237,224,200);}");
 	setFixedSize(425, 300);
 
+
+	//初始化界面控件
 	QBoxLayout* layout = new QVBoxLayout(this);
 	QLabel* gamewon_label = new QLabel("You Won", this);
 	gamewon_label->setStyleSheet(
@@ -42,20 +48,33 @@ GameWonWindow::GameWonWindow(QWidget* parent):QWidget(parent){
 }
 
 
+/*
+ *	析构函数
+ */
 GameWonWindow::~GameWonWindow(){
 
 }
 
 
 
+/*
+ *	获取成绩标签
+ */
 QLabel* GameWonWindow::GetScoreLabel() {
 	return score_label_;
 }
 
+/*
+ *	获取继续游戏标签
+ */
 QPushButton* GameWonWindow::GetContinueButton() {
 	return continue_button_;
 }
 
+
+/*
+ *	获取重新开始游戏标签
+ */
 QPushButton* GameWonWindow::GetRestartButton() {
 	return restart_button_;
 }

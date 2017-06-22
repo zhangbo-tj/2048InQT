@@ -6,10 +6,15 @@
 #include <QDebug>
 
 
+/*
+ *	游戏失败界面
+ */
 GameOverWindow::GameOverWindow(QWidget* parent):QWidget(parent){
 	setStyleSheet("GameOverWindow{background: rgb(237,224,200);}");
 	setFixedSize(425, 200);
 
+
+	//初始化控件
 	QVBoxLayout* layout = new QVBoxLayout(this);
 	QLabel* gameover_label = new QLabel("Game Over", this);
 	gameover_label->setStyleSheet(
@@ -32,15 +37,25 @@ GameOverWindow::GameOverWindow(QWidget* parent):QWidget(parent){
 }
 
 
+/*
+ *	析构函数
+ */
 GameOverWindow::~GameOverWindow(){
 
 }
 
+
+/*
+ *	获取重新开始游戏按钮
+ */
 QPushButton* GameOverWindow::GetResetButton()const {
 	return reset_button_;
 }
 
 
+/*
+ *	获取分数标签
+ */
 QLabel* GameOverWindow::GetScoreLabel() {
 	return score_label_;
 }
